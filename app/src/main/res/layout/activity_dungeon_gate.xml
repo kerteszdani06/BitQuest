@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootDungeon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Floor 1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvMonsterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monster"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressMonster"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="100"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvLeadHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lead Hero"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressLead"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="100"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvPartnerHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partner Hero"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnAttack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Attack"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSwap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Swap"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnUsePotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use Potion"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Combat Log"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvCombatLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Battle begins..."
+            android:padding="12dp"
+            android:background="#DDDDDD"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</ScrollView>

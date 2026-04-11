@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Inn"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHeroes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnRecruit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recruit Hero"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnTrain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Training Grounds"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnDungeon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dungeon Gate" />
+
+</LinearLayout>
