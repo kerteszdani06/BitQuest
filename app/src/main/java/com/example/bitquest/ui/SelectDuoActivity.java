@@ -68,6 +68,10 @@ public class SelectDuoActivity extends AppCompatActivity {
             Hero leadHero = heroList.get(leadPos);
             Hero partnerHero = heroList.get(partnerPos);
 
+            leadHero.recordMission();
+            partnerHero.recordMission();
+            SaveManager.save(this, archive);
+
             Intent intent = new Intent(SelectDuoActivity.this, DungeonGateActivity.class);
             intent.putExtra("lead_id", leadHero.getId());
             intent.putExtra("partner_id", partnerHero.getId());

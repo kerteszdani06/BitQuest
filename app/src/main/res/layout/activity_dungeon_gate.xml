@@ -70,6 +70,20 @@
             android:layout_marginBottom="8dp" />
 
         <Button
+            android:id="@+id/btnDefend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Defend"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSpecial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Use Special Ability"
+            android:layout_marginBottom="8dp" />
+
+        <Button
             android:id="@+id/btnSwap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package com.example.bitquest.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,13 +34,16 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
     public void onBindViewHolder(@NonNull HeroViewHolder holder, int position) {
         Hero hero = heroList.get(position);
 
+        holder.imgHero.setImageResource(hero.getImageResId());
         holder.tvHeroName.setText(hero.getName());
         holder.tvHeroClass.setText(hero.getHeroClass());
         holder.tvHeroStats.setText(
-                "Energy: " + hero.getEnergy() + "/" + hero.getMaxEnergy()
+                "HP: " + hero.getEnergy() + "/" + hero.getMaxEnergy()
                         + " | Skill: " + hero.getSkill()
                         + " | XP: " + hero.getExperience()
-                        + " | Kills: " + hero.getKillCount()
+                        + "\nMissions: " + hero.getMissionsPlayed()
+                        + " | Wins: " + hero.getVictories()
+                        + " | Training: " + hero.getTrainingSessions()
         );
     }
 
@@ -49,10 +53,12 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
     }
 
     static class HeroViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgHero;
         TextView tvHeroName, tvHeroClass, tvHeroStats;
 
         public HeroViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgHero = itemView.findViewById(R.id.imgHero);
             tvHeroName = itemView.findViewById(R.id.tvHeroName);
             tvHeroClass = itemView.findViewById(R.id.tvHeroClass);
             tvHeroStats = itemView.findViewById(R.id.tvHeroStats);

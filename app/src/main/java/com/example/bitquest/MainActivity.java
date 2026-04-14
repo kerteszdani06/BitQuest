@@ -13,12 +13,14 @@ import com.example.bitquest.model.GuildArchive;
 import com.example.bitquest.ui.DungeonGateActivity;
 import com.example.bitquest.ui.RecruitHeroActivity;
 import com.example.bitquest.ui.SelectDuoActivity;
-import com.example.bitquest.ui.TrainingGroundsActivity;import com.example.bitquest.ui.adapter.HeroAdapter;
+import com.example.bitquest.ui.StatisticsActivity;
+import com.example.bitquest.ui.TrainingGroundsActivity;
+import com.example.bitquest.ui.adapter.HeroAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerHeroes;
-    private Button btnRecruit, btnTrain, btnDungeon;
+    private Button btnRecruit, btnTrain, btnDungeon, btnStats;
     private GuildArchive archive;
 
     @Override
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btnRecruit = findViewById(R.id.btnRecruit);
         btnTrain = findViewById(R.id.btnTrain);
         btnDungeon = findViewById(R.id.btnDungeon);
+        btnStats = findViewById(R.id.btnStats);
 
         archive = SaveManager.load(this);
 
@@ -48,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnDungeon.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SelectDuoActivity.class);
+            startActivity(intent);
+        });
+
+        btnStats.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
             startActivity(intent);
         });
     }

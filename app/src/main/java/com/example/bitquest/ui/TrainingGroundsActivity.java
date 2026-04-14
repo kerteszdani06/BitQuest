@@ -56,6 +56,7 @@ public class TrainingGroundsActivity extends AppCompatActivity {
             int position = spinnerHeroes.getSelectedItemPosition();
             Hero selectedHero = heroList.get(position);
             selectedHero.gainExperience(50);
+            selectedHero.recordTrainingSession();
 
             SaveManager.save(this, archive);
             Toast.makeText(this,

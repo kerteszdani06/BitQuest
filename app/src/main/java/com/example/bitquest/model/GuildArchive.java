@@ -31,4 +31,10 @@ public class GuildArchive implements Serializable {
     public int size() {
         return heroMap.size();
     }
+
+    public void restoreAllHeroesEnergy() {
+        for (Hero hero : heroMap.values()) {
+            hero.restoreFullEnergy();
+        }
+    }
 }

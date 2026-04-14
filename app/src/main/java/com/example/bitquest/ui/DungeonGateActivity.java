@@ -21,7 +21,7 @@ public class DungeonGateActivity extends AppCompatActivity {
 
     private TextView tvFloor, tvMonsterName, tvLeadHero, tvPartnerHero, tvCombatLog;
     private ProgressBar progressMonster, progressLead;
-    private Button btnAttack, btnSwap, btnUsePotion;
+    private Button btnAttack, btnSwap, btnUsePotion, btnDefend, btnSpecial;
 
     private GuildArchive archive;
     private CombatManager combatManager;
@@ -43,6 +43,8 @@ public class DungeonGateActivity extends AppCompatActivity {
         btnAttack = findViewById(R.id.btnAttack);
         btnSwap = findViewById(R.id.btnSwap);
         btnUsePotion = findViewById(R.id.btnUsePotion);
+        btnDefend = findViewById(R.id.btnDefend);
+        btnSpecial = findViewById(R.id.btnSpecial);
 
         archive = SaveManager.load(this);
 
@@ -64,6 +66,8 @@ public class DungeonGateActivity extends AppCompatActivity {
         btnAttack.setOnClickListener(v -> handleAttack());
         btnSwap.setOnClickListener(v -> handleSwap());
         btnUsePotion.setOnClickListener(v -> handlePotion());
+        btnDefend.setOnClickListener(v -> handleDefend());
+        btnSpecial.setOnClickListener(v -> handleSpecial());
     }
 
     private void handleAttack() {
@@ -72,17 +76,7 @@ public class DungeonGateActivity extends AppCompatActivity {
         log.append(combatManager.attack()).append("\n");
 
         if (combatManager.isVictory()) {
-            Hero lead = combatManager.getLead();
-            if (lead != null) {
-                lead.incrementKillCount();
-                lead.gainExperience(50);
-            }
-
-            Hero partner = combatManager.getPartner();
-            if (partner != null && partner.isAlive()) {
-                partner.gainExperience(50);
-            }
-
+            rewardSurvivors();
             SaveManager.save(this, archive);
             tvCombatLog.setText(log.toString());
             updateUI();
@@ -93,31 +87,48 @@ public class DungeonGateActivity extends AppCompatActivity {
         log.append(combatManager.enemyTurn()).append("\n");
         flashScreen();
 
-        combatManager.checkDeath();
+        String deathLog = combatManager.checkDeaths();
+        if (!deathLog.isEmpty()) {
+            log.append(deathLog);
+        }
+
+        removeDefeatedHeroesFromArchive();
 
         if (combatManager.isGameOver()) {
-            handleGameOver(log.toString());
+            SaveManager.save(this, archive);
+            tvCombatLog.setText(log + "\nGame Over.");
+            showGameOverDialog();
             return;
         }
 
+        SaveManager.save(this, archive);
         tvCombatLog.setText(log.toString());
         updateUI();
     }
 
     private void handleSwap() {
-        String log = combatManager.swap() + "\n";
+        StringBuilder log = new StringBuilder();
 
-        log += combatManager.enemyTurn();
+        log.append(combatManager.swap()).append("\n");
+        log.append(combatManager.enemyTurn()).append("\n");
         flashScreen();
 
-        combatManager.checkDeath();
+        String deathLog = combatManager.checkDeaths();
+        if (!deathLog.isEmpty()) {
+            log.append(deathLog);
+        }
+
+        removeDefeatedHeroesFromArchive();
 
         if (combatManager.isGameOver()) {
-            handleGameOver(log);
+            SaveManager.save(this, archive);
+            tvCombatLog.setText(log + "\nGame Over.");
+            showGameOverDialog();
             return;
         }
 
-        tvCombatLog.setText(log);
+        SaveManager.save(this, archive);
+        tvCombatLog.setText(log.toString());
         updateUI();
     }
 
@@ -132,32 +143,113 @@ public class DungeonGateActivity extends AppCompatActivity {
         if (lead != null) {
             lead.heal(30);
             potions--;
+            SaveManager.save(this, archive);
             tvCombatLog.setText(lead.getName() + " used a potion and recovered energy.");
             updateUI();
         }
     }
 
-    private void handleGameOver(String log) {
-        Hero lead = combatManager.getLead();
-        Hero partner = combatManager.getPartner();
+    private void handleDefend() {
+        StringBuilder log = new StringBuilder();
 
-        if (lead != null && !lead.isAlive()) {
-            lead.resetSkillOnDeath();
-            archive.removeHero(lead.getId());
+        log.append(combatManager.defend()).append("\n");
+        log.append(combatManager.enemyTurn()).append("\n");
+        flashScreen();
+
+        String deathLog = combatManager.checkDeaths();
+        if (!deathLog.isEmpty()) {
+            log.append(deathLog);
         }
 
-        if (partner != null && !partner.isAlive()) {
-            partner.resetSkillOnDeath();
-            archive.removeHero(partner.getId());
+        removeDefeatedHeroesFromArchive();
+
+        if (combatManager.isGameOver()) {
+            SaveManager.save(this, archive);
+            tvCombatLog.setText(log + "\nGame Over.");
+            showGameOverDialog();
+            return;
         }
 
         SaveManager.save(this, archive);
-        tvCombatLog.setText(log + "\nGame Over.");
+        tvCombatLog.setText(log.toString());
+        updateUI();
+    }
 
+    private void handleSpecial() {
+        StringBuilder log = new StringBuilder();
+
+        log.append(combatManager.useSpecial()).append("\n");
+
+        if (combatManager.isVictory()) {
+            rewardSurvivors();
+            SaveManager.save(this, archive);
+            tvCombatLog.setText(log.toString());
+            updateUI();
+            showVictoryDialog();
+            return;
+        }
+
+        log.append(combatManager.enemyTurn()).append("\n");
+        flashScreen();
+
+        String deathLog = combatManager.checkDeaths();
+        if (!deathLog.isEmpty()) {
+            log.append(deathLog);
+        }
+
+        removeDefeatedHeroesFromArchive();
+
+        if (combatManager.isGameOver()) {
+            SaveManager.save(this, archive);
+            tvCombatLog.setText(log + "\nGame Over.");
+            showGameOverDialog();
+            return;
+        }
+
+        SaveManager.save(this, archive);
+        tvCombatLog.setText(log.toString());
+        updateUI();
+    }
+
+    private void rewardSurvivors() {
+        Hero lead = combatManager.getLead();
+        Hero partner = combatManager.getPartner();
+
+        if (lead != null && lead.isAlive()) {
+            lead.incrementKillCount();
+            lead.gainExperience(50);
+            lead.recordVictory();
+        }
+
+        if (partner != null && partner.isAlive()) {
+            partner.gainExperience(50);
+            partner.recordVictory();
+        }
+    }
+
+    private void removeDefeatedHeroesFromArchive() {
+        for (Hero defeated : combatManager.getDefeatedHeroes()) {
+            defeated.recordDefeat();
+            archive.removeHero(defeated.getId());
+        }
+        combatManager.clearDefeatedHeroes();
+    }
+
+    private void returnToInnAndRestoreEnergy() {
+        archive.restoreAllHeroesEnergy();
+        SaveManager.save(this, archive);
+        finish();
+    }
+
+    private void showGameOverDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Game Over")
-                .setMessage("Both heroes have fallen.")
-                .setPositiveButton("Return to Inn", (dialog, which) -> finish())
+                .setMessage("All active heroes have fallen and were removed from the guild.")
+                .setPositiveButton("Return to Inn", (dialog, which) -> {
+                    archive.restoreAllHeroesEnergy();
+                    SaveManager.save(this, archive);
+                    finish();
+                })
                 .setCancelable(false)
                 .show();
     }
@@ -174,7 +266,7 @@ public class DungeonGateActivity extends AppCompatActivity {
                     tvCombatLog.setText("A new monster appears.");
                     updateUI();
                 })
-                .setNegativeButton("Return to Inn", (dialog, which) -> finish())
+                .setNegativeButton("Return to Inn", (dialog, which) -> returnToInnAndRestoreEnergy())
                 .show();
     }
 
@@ -182,30 +274,35 @@ public class DungeonGateActivity extends AppCompatActivity {
         tvFloor.setText("Floor " + floor);
 
         if (combatManager.getMonster() != null) {
-            tvMonsterName.setText(combatManager.getMonster().getName()
-                    + " HP: " + combatManager.getMonster().getEnergy()
-                    + "/" + combatManager.getMonster().getMaxEnergy());
+            tvMonsterName.setText(
+                    combatManager.getMonster().getName() + " HP: "
+                            + combatManager.getMonster().getEnergy() + "/"
+                            + combatManager.getMonster().getMaxEnergy()
+            );
             progressMonster.setMax(combatManager.getMonster().getMaxEnergy());
             progressMonster.setProgress(combatManager.getMonster().getEnergy());
         }
 
         Hero lead = combatManager.getLead();
         if (lead != null) {
-            tvLeadHero.setText("Lead: " + lead.getName()
-                    + " (" + lead.getHeroClass() + ") HP: "
-                    + lead.getEnergy() + "/" + lead.getMaxEnergy());
+            tvLeadHero.setText(
+                    "Lead: " + lead.getName() + " (" + lead.getHeroClass() + ") HP: "
+                            + lead.getEnergy() + "/" + lead.getMaxEnergy()
+            );
             progressLead.setMax(lead.getMaxEnergy());
             progressLead.setProgress(lead.getEnergy());
         } else {
             tvLeadHero.setText("Lead: None");
+            progressLead.setMax(100);
             progressLead.setProgress(0);
         }
 
         Hero partner = combatManager.getPartner();
         if (partner != null) {
-            tvPartnerHero.setText("Partner: " + partner.getName()
-                    + " (" + partner.getHeroClass() + ") HP: "
-                    + partner.getEnergy() + "/" + partner.getMaxEnergy());
+            tvPartnerHero.setText(
+                    "Partner: " + partner.getName() + " (" + partner.getHeroClass() + ") HP: "
+                            + partner.getEnergy() + "/" + partner.getMaxEnergy()
+            );
         } else {
             tvPartnerHero.setText("Partner: None");
         }

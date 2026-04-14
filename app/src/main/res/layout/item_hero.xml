@@ -2,30 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="12dp"
     android:layout_marginBottom="8dp"
     android:background="#DDDDDD">
 
-    <TextView
-        android:id="@+id/tvHeroName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hero Name"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/imgHero"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/knight"
+        android:layout_marginEnd="12dp" />
 
-    <TextView
-        android:id="@+id/tvHeroClass"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hero Class"
-        android:textSize="16sp" />
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvHeroStats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stats"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvHeroName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hero Name"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvHeroClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hero Class"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvHeroStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stats"
+            android:textSize="14sp" />
+    </LinearLayout>
+
 </LinearLayout>
