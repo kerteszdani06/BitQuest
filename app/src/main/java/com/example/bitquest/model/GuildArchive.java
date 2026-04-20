@@ -56,6 +56,12 @@ public class GuildArchive implements Serializable {
         }
     }
 
+    public void progressMedbayRecoveryForAll() {
+        for (Hero hero : heroMap.values()) {
+            hero.progressMedbayRecovery();
+        }
+    }
+
     public int size() {
         return heroMap.size();
     }

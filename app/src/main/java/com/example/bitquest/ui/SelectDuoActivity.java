@@ -113,6 +113,7 @@ public class SelectDuoActivity extends AppCompatActivity {
             if (reserve2Hero != null) {
                 reserve2Hero.recordMission();
             }
+            archive.progressMedbayRecoveryForAll();
             SaveManager.save(this, archive);
 
             MissionType missionType = (MissionType) spinnerMissionType.getSelectedItem();

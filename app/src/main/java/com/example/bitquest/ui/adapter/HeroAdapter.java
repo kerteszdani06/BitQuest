@@ -1,5 +1,6 @@
 package com.example.bitquest.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         return new HeroViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull HeroViewHolder holder, int position) {
         Hero hero = heroList.get(position);
@@ -37,6 +39,13 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
         holder.imgHero.setImageResource(hero.getImageResId());
         holder.tvHeroName.setText(hero.getName());
         holder.tvHeroClass.setText(hero.getHeroClass());
+        String statusText;
+        if (hero.isInMedbay()) {
+            statusText = "Status: In Medbay (" + hero.getMedbayMissionsRemaining() + " mission(s) remaining)";
+        } else {
+            statusText = "Status: Ready";
+        }
+
         holder.tvHeroStats.setText(
                 "HP: " + hero.getEnergy() + "/" + hero.getMaxEnergy()
                         + " | Skill: " + hero.getSkill()
@@ -44,6 +53,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.HeroViewHolder
                         + "\nMissions: " + hero.getMissionsPlayed()
                         + " | Wins: " + hero.getVictories()
                         + " | Training: " + hero.getTrainingSessions()
+                        + "\n" + statusText
         );
     }
 
