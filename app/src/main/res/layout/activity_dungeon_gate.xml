@@ -20,6 +20,21 @@
             android:layout_marginBottom="16dp" />
 
         <TextView
+            android:id="@+id/tvMissionDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mission description"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:id="@+id/imgMonster"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/monster"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
             android:id="@+id/tvMonsterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,6 +59,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imgLead"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="12dp" />
+
         <ProgressBar
             android:id="@+id/progressLead"
             style="?android:attr/progressBarStyleHorizontal"
@@ -61,6 +82,16 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:id="@+id/imgReserve1"
+            android:layout_width="72dp"
+            android:layout_height="72dp" />
+
+        <ImageView
+            android:id="@+id/imgReserve2"
+            android:layout_width="72dp"
+            android:layout_height="72dp" />
 
         <Button
             android:id="@+id/btnAttack"
@@ -84,23 +115,37 @@
             android:layout_marginBottom="8dp" />
 
         <Button
-            android:id="@+id/btnSwap"
+            android:id="@+id/btnSwap1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Swap"
-            android:layout_marginBottom="8dp" />
+            android:text="@string/swap_with_reserve_1" />
+
+        <Button
+            android:id="@+id/btnSwap2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/swap_with_reserve_2" />
+
+        <TextView
+            android:id="@+id/tvPotionCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/potions_0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/btnUsePotion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use Potion"
+            android:text="@string/use_potion"
             android:layout_marginBottom="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Combat Log"
+            android:text="@string/combat_log"
             android:textStyle="bold"
             android:textSize="18sp" />
 
@@ -108,7 +153,7 @@
             android:id="@+id/tvCombatLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Battle begins..."
+            android:text="@string/battle_begins"
             android:padding="12dp"
             android:background="#DDDDDD"
             android:layout_marginTop="8dp" />

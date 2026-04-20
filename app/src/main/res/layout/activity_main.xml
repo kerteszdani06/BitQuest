@@ -9,7 +9,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Inn"
+        android:text="@string/the_inn"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
@@ -25,27 +25,48 @@
         android:id="@+id/btnRecruit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recruit Hero"
+        android:text="@string/recruit_hero"
         android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/btnTrain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Training Grounds"
+        android:text="@string/training_grounds"
         android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/btnDungeon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dungeon Gate" />
+        android:text="@string/dungeon_gate" />
 
     <Button
         android:id="@+id/btnStats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Statistics"
+        android:text="@string/statistics"
         android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnSaveFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Crew to File"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnLoadFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Crew from File"
+        android:layout_marginTop="8dp" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
 
 </LinearLayout>

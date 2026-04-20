@@ -27,10 +27,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Partner Hero" />
+        android:text="@string/partner_hero" />
 
     <Spinner
         android:id="@+id/spinnerPartner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reserve_2" />
+
+    <Spinner
+        android:id="@+id/spinnerReserve2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mission_type" />
+
+    <Spinner
+        android:id="@+id/spinnerMissionType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
@@ -39,6 +61,6 @@
         android:id="@+id/btnStartDungeon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Dungeon" />
+        android:text="@string/start_dungeon" />
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.bitquest.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,20 +21,33 @@ import java.util.List;
 
 public class StatisticsActivity extends AppCompatActivity {
 
-    private AnyChartView anyChartView;
-    private GuildArchive archive;
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        anyChartView = findViewById(R.id.any_chart_view);
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+        TextView tvStatsSummary = findViewById(R.id.tvStatsSummary);
 
-        archive = SaveManager.load(this);
+        GuildArchive archive = SaveManager.load(this);
+
+        StringBuilder stats = new StringBuilder();
+
+        for (Hero hero : archive.getAllHeroes()) {
+            stats.append(hero.getName())
+                    .append(" | Missions: ").append(hero.getMissionsPlayed())
+                    .append(" | Wins: ").append(hero.getVictories())
+                    .append(" | Lost: ").append(hero.getLostMissions())
+                    .append(" | Training: ").append(hero.getTrainingSessions())
+                    .append("\n");
+        }
+
+        tvStatsSummary.setText(stats.toString());
 
         // Prevent crash if no heroes exist
-        if (archive == null || archive.getAllHeroes().isEmpty()) {
+        if (archive.getAllHeroes().isEmpty()) {
+            tvStatsSummary.setText("No statistics available yet.");
             return;
         }
 

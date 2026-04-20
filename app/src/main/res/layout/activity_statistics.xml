@@ -8,10 +8,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guild Statistics"
+        android:text="@string/guild_statistics"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvStatsSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stats_summary"
+        android:textSize="14sp"
+        android:layout_marginTop="12dp" />
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"

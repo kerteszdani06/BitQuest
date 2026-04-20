@@ -3,6 +3,7 @@ package com.example.bitquest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +21,8 @@ import com.example.bitquest.ui.adapter.HeroAdapter;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerHeroes;
-    private Button btnRecruit, btnTrain, btnDungeon, btnStats;
     private GuildArchive archive;
+    private Button btnSaveFile, btnLoadFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerHeroes = findViewById(R.id.recyclerHeroes);
-        btnRecruit = findViewById(R.id.btnRecruit);
-        btnTrain = findViewById(R.id.btnTrain);
-        btnDungeon = findViewById(R.id.btnDungeon);
-        btnStats = findViewById(R.id.btnStats);
+        Button btnRecruit = findViewById(R.id.btnRecruit);
+        Button btnTrain = findViewById(R.id.btnTrain);
+        Button btnDungeon = findViewById(R.id.btnDungeon);
+        Button btnStats = findViewById(R.id.btnStats);
+        btnSaveFile = findViewById(R.id.btnSaveFile);
+        btnLoadFile = findViewById(R.id.btnLoadFile);
 
         archive = SaveManager.load(this);
 
@@ -57,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
         btnStats.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
             startActivity(intent);
+        });
+
+        btnSaveFile.setOnClickListener(v -> {
+            SaveManager.saveToFile(this, archive);
+            Toast.makeText(this, "Crew saved to file", Toast.LENGTH_SHORT).show();
+        });
+
+        btnLoadFile.setOnClickListener(v -> {
+            archive = SaveManager.loadFromFile(this);
+            SaveManager.save(this, archive); // keep auto-save in sync
+            recyclerHeroes.setAdapter(new HeroAdapter(archive.getAllHeroes()));
+            Toast.makeText(this, "Crew loaded from file", Toast.LENGTH_SHORT).show();
         });
     }
 

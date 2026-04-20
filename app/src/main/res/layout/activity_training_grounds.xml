@@ -23,6 +23,6 @@
         android:id="@+id/btnTrainHero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Train Hero" />
+        android:text="@string/train_hero" />
 
 </LinearLayout>

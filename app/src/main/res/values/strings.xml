@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">BitQuest</string>
+    <string name="swap_with_reserve_1">Swap with Reserve 1</string>
+    <string name="swap_with_reserve_2">Swap with Reserve 2</string>
+    <string name="use_potion">Use Potion</string>
+    <string name="combat_log">Combat Log</string>
+    <string name="battle_begins">Battle begins...</string>
+    <string name="statistics">Statistics</string>
+    <string name="dungeon_gate">Dungeon Gate</string>
+    <string name="training_grounds">Training Grounds</string>
+    <string name="recruit_hero">Recruit Hero</string>
+    <string name="the_inn">The Inn</string>
+    <string name="confirm">Confirm</string>
+    <string name="necromancer">Necromancer</string>
+    <string name="wizard">Wizard</string>
+    <string name="cleric">Cleric</string>
+    <string name="archer">Archer</string>
+    <string name="knight">Knight</string>
+    <string name="enter_hero_name">Enter hero name</string>
+    <string name="partner_hero">Partner Hero</string>
+    <string name="start_dungeon">Start Dungeon</string>
+    <string name="reserve_2">Reserve 2</string>
+    <string name="mission_type">Mission Type</string>
+    <string name="stats_summary">Stats summary</string>
+    <string name="guild_statistics">Guild Statistics</string>
+    <string name="train_hero">Train Hero</string>
+    <string name="medbay">Medbay</string>
+    <string name="potions_0">Potions: 0</string>
 </resources>

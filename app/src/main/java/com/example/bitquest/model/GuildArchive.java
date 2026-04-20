@@ -12,10 +12,6 @@ public class GuildArchive implements Serializable {
         heroMap.put(hero.getId(), hero);
     }
 
-    public void removeHero(int id) {
-        heroMap.remove(id);
-    }
-
     public Hero getHero(int id) {
         return heroMap.get(id);
     }
@@ -24,17 +20,47 @@ public class GuildArchive implements Serializable {
         return new ArrayList<>(heroMap.values());
     }
 
-    public boolean isEmpty() {
-        return heroMap.isEmpty();
+    public List<Hero> getAvailableHeroes() {
+        List<Hero> available = new ArrayList<>();
+        for (Hero hero : heroMap.values()) {
+            if (!hero.isInMedbay()) {
+                available.add(hero);
+            }
+        }
+        return available;
+    }
+
+    public List<Hero> getMedbayHeroes() {
+        List<Hero> medbay = new ArrayList<>();
+        for (Hero hero : heroMap.values()) {
+            if (hero.isInMedbay()) {
+                medbay.add(hero);
+            }
+        }
+        return medbay;
+    }
+
+    public void restoreAllAvailableHeroesEnergy() {
+        for (Hero hero : heroMap.values()) {
+            if (!hero.isInMedbay()) {
+                hero.restoreFullEnergy();
+            }
+        }
+    }
+
+    public void releaseAllFromMedbay() {
+        for (Hero hero : heroMap.values()) {
+            if (hero.isInMedbay()) {
+                hero.releaseFromMedbay();
+            }
+        }
     }
 
     public int size() {
         return heroMap.size();
     }
 
-    public void restoreAllHeroesEnergy() {
-        for (Hero hero : heroMap.values()) {
-            hero.restoreFullEnergy();
-        }
+    public boolean isEmpty() {
+        return heroMap.isEmpty();
     }
 }

@@ -6,26 +6,38 @@ public abstract class Hero implements Serializable {
     protected int id;
     protected String name;
     protected String heroClass;
+
     protected int energy;
     protected int maxEnergy;
     protected int skill;
     protected int experience;
     protected int killCount;
 
-    // New stats
     protected int missionsPlayed;
     protected int victories;
     protected int trainingSessions;
     protected int defeats;
+    protected int lostMissions;
+
     protected boolean defending;
+    protected boolean inMedbay;
+
+    // Initial stats
+    protected int initialMaxEnergy;
+    protected int initialSkill;
 
     public Hero(int id, String name, String heroClass, int maxEnergy, int skill) {
         this.id = id;
         this.name = name;
         this.heroClass = heroClass;
+
         this.maxEnergy = maxEnergy;
         this.energy = maxEnergy;
         this.skill = skill;
+
+        this.initialMaxEnergy = maxEnergy;
+        this.initialSkill = skill;
+
         this.experience = 0;
         this.killCount = 0;
 
@@ -33,11 +45,15 @@ public abstract class Hero implements Serializable {
         this.victories = 0;
         this.trainingSessions = 0;
         this.defeats = 0;
+        this.lostMissions = 0;
+
         this.defending = false;
+        this.inMedbay = false;
     }
 
     public abstract int attack();
     public abstract int specialAbility();
+    public abstract int getImageResId();
 
     public void takeDamage(int damage) {
         if (defending) {
@@ -79,10 +95,6 @@ public abstract class Hero implements Serializable {
         defending = true;
     }
 
-    public boolean isDefending() {
-        return defending;
-    }
-
     public void recordMission() {
         missionsPlayed++;
     }
@@ -99,7 +111,23 @@ public abstract class Hero implements Serializable {
         defeats++;
     }
 
-    public abstract int getImageResId();
+    public void recordLostMission() {
+        lostMissions++;
+    }
+
+    public void sendToMedbay() {
+        inMedbay = true;
+        energy = initialMaxEnergy;
+        maxEnergy = initialMaxEnergy;
+        skill = Math.max(1, initialSkill - 1); // simple penalty
+        experience = 0; // optional penalty
+        defending = false;
+    }
+
+    public void releaseFromMedbay() {
+        inMedbay = false;
+        restoreFullEnergy();
+    }
 
     public int getId() { return id; }
     public String getName() { return name; }
@@ -113,4 +141,7 @@ public abstract class Hero implements Serializable {
     public int getVictories() { return victories; }
     public int getTrainingSessions() { return trainingSessions; }
     public int getDefeats() { return defeats; }
+    public int getLostMissions() { return lostMissions; }
+    public boolean isInMedbay() { return inMedbay; }
+    public boolean isDefending() { return defending; }
 }

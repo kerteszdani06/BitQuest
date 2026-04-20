@@ -21,7 +21,7 @@
             android:id="@+id/etHeroName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter hero name"
+            android:hint="@string/enter_hero_name"
             android:layout_marginBottom="16dp" />
 
         <RadioGroup
@@ -34,38 +34,38 @@
                 android:id="@+id/rbKnight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Knight" />
+                android:text="@string/knight" />
 
             <RadioButton
                 android:id="@+id/rbArcher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Archer" />
+                android:text="@string/archer" />
 
             <RadioButton
                 android:id="@+id/rbCleric"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cleric" />
+                android:text="@string/cleric" />
 
             <RadioButton
                 android:id="@+id/rbWizard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wizard" />
+                android:text="@string/wizard" />
 
             <RadioButton
                 android:id="@+id/rbNecromancer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Necromancer" />
+                android:text="@string/necromancer" />
         </RadioGroup>
 
         <Button
             android:id="@+id/btnConfirmRecruit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm" />
+            android:text="@string/confirm" />
 
     </LinearLayout>
 </ScrollView>
